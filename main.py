@@ -7,12 +7,11 @@ from pygame.locals import *
 pygame.init()
 window = pygame.display.set_mode((400, 300))
 pygame.display.set_caption("hello world!")
-
-rect = pygame.rect.Rect(10,10,10,10)
+missingAssetImage = pygame.image.load("error.png")
 
 while True:
 	window.fill(constants.BLACK)
-	window.blit(rect, 10, 10)
+	window.blit(missingAssetImage, (10, 10))
 	for event in pygame.event.get():
 		if event.type == QUIT:
 			pygame.quit()
