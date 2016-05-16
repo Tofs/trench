@@ -1,19 +1,14 @@
-import pygame
-import sys
-import constants
-from pygame.locals import *
+import pyglet
 
+window = pyglet.window.Window()
 
-pygame.init()
-window = pygame.display.set_mode((400, 300))
-pygame.display.set_caption("hello world!")
-missingAssetImage = pygame.image.load("error.png")
+label = pyglet.text.Label("hello world!",font_name='Times New Roman', font_size=36,
+                          x=window.width//2, y=window.height//2,
+                          anchor_x='center', anchor_y='center')
 
-while True:
-	window.fill(constants.BLACK)
-	window.blit(missingAssetImage, (10, 10))
-	for event in pygame.event.get():
-		if event.type == QUIT:
-			pygame.quit()
-			sys.exit()
-	pygame.display.update()
+@window.event
+def on_draw():
+	window.clear()
+	label.draw()
+
+pyglet.app.run()
