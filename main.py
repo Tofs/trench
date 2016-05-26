@@ -1,6 +1,16 @@
-import pyglet
 import logging
-from pyglet.window import key
+import cocos
+
+
+class HelloWorld(cocos.layer.Layer):
+
+	def __init__(self):
+		super(HelloWorld, self).__init__()
+
+		label = cocos.text.Label("Hello world!")
+		label.position = 320, 240
+
+		self.add(label)
 
 
 def configLogging(debug):
@@ -16,29 +26,10 @@ configLogging(True)
 logger = logging.getLogger("main")
 logger.info("Program Start")
 
-logger.debug("Creating the window")
-window = pyglet.window.Window()
-logger.debug("The window has now been created")
+cocos.director.director.init()
 
-image = pyglet.resource.image("resources/images/resourceNotFound.png")
+hello_layer = HelloWorld()
 
-x = 10
-y = 10
-keys = key.KeyStateHandler()
+main_scene = cocos.scene.Scene(hello_layer)
 
-
-@window.event
-def on_key_press(symbol, modifiers):
-	logger.debug("Mod: {0} Key: {1}".format(modifiers, symbol))
-
-
-@window.event
-def on_draw():
-	global x
-	window.clear()
-	image.blit(x, y)
-	if keys[key.A]:
-		x = x - 1
-		logger.debug("troll")
-
-pyglet.app.run()
+cocos.director.director.run(main_scene)
